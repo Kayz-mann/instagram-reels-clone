@@ -1,14 +1,44 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import "./VideoCard.css"
+import VIdeoFooter from './VIdeoFooter';
+import VideoHeader from './VideoHeader';
 
-function VideoCard() {
+function VideoCard({ url, likes, shares, channel, avatarSrc, song }) {
+    const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+    const videoRef = useRef(null);
+
+    const onVideoPress = () => {
+       if (isVideoPlaying) {
+        //    stop
+        videoRef.current.pause();
+        setIsVideoPlaying(false)
+
+       } else {
+        //   play
+        videoRef.current.play();
+        setIsVideoPlaying(true)
+       }
+    }
+
+
     return (
         <div className="videoCard">
+            <VideoHeader />
             <video 
+            ref={videoRef}
+            onClick={onVideoPress}
             className="videoCard__player"
-            src="https://instagram.flhr3-2.fna.fbcdn.net/v/t50.2886-16/117598442_205338364335864_545695080903278566_n.mp4?_nc_ht=instagram.flhr3-2.fna.gbcdn.net&_nc_cat=100&_nc_ohc=vjDPPklLnOYAX-xOjlv&oe=5F38FACF&oh=fbe19a529394ac8cc1a61f1b2b016e54"
+            src={url}
+            type="video"
             alt="IG Reel Video"
             loop
+            />
+            <VIdeoFooter 
+            channel={channel}
+            likes={likes}
+            shares={shares}
+            avatarSrc={avatarSrc}
+            song={song}
             />
         </div>
     )

@@ -14,7 +14,14 @@ function App() {
         {/* Reels text */}
       </div>
       <div className="app__videos">
-        <VideoCard />
+        <VideoCard 
+        channel="kayzmann"
+        avatar="https://avatars.githubusercontent.com/u/61081369?s=60&v=4"
+        song="Test song - kayzmann"
+        url="http://techslides.com/demos/sample-videos/small.ogv"
+        likes={800}
+        shares={95}
+        />
         <VideoCard />
         <VideoCard />
         <VideoCard />
