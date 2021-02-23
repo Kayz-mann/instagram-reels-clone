@@ -1,8 +1,20 @@
+import React, { useState, useEffect } from "react"
 import './App.css';
+import db from "./firebase";
 import VideoCard from './VideoCard';
 
 
+
 function App() {
+  const [reels, setReels] = useState([]);
+
+  useEffect(() => {
+    db.collection("reels").onSnapshot(snapshot => (
+      setReels(snapshot.docs.map(doc => doc.data()))
+    ))
+  }, [])
+
+
   return (
     <div className="app">
       <div className="app__top">
@@ -14,19 +26,18 @@ function App() {
         {/* Reels text */}
       </div>
       <div className="app__videos">
-        <VideoCard 
-        channel="kayzmann"
-        avatar="https://avatars.githubusercontent.com/u/61081369?s=60&v=4"
-        song="Test song - kayzmann"
-        url="http://techslides.com/demos/sample-videos/small.ogv"
-        likes={800}
-        shares={95}
-        />
-        <VideoCard />
-        <VideoCard />
-        <VideoCard />
-        
-        {/* video container */}
+        {reels.map(({channel, avatarSrc, song, url, likes, shares}) =>(
+           
+           <VideoCard 
+           channel={channel}
+           avatarSrc={avatarSrc}
+           song={song}
+           url={url}
+           likes={likes}
+           shares={shares}
+           />
+        ))}
+       {/* video container */}
       </div>
       
     </div>
