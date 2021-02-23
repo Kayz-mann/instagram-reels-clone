@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import "./VideoCard.css"
-import VIdeoFooter from './VIdeoFooter';
+import VideoFooter from './VideoFooter';
 import VideoHeader from './VideoHeader';
 
 function VideoCard({ url, likes, shares, channel, avatarSrc, song }) {
@@ -33,7 +33,7 @@ function VideoCard({ url, likes, shares, channel, avatarSrc, song }) {
             alt="IG Reel Video"
             loop
             />
-            <VIdeoFooter 
+            <VideoFooter 
             channel={channel}
             likes={likes}
             shares={shares}
